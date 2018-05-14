@@ -1,16 +1,17 @@
 import React from 'react';
 import { render } from 'react-dom';
 import Gallery from './components/Gallery';
+import Lightbox from 'react-images';
 import CustomSpinner from './components/Spinner';
 import './example.less';
 
-function makeUnsplashSrc (id) {
+function makeUnsplashSrc(id) {
 	return `https://images.unsplash.com/photo-${id}?dpr=2&auto=format&w=1024&h=1024`;
 }
-function makeUnsplashSrcSet (id, size) {
+function makeUnsplashSrcSet(id, size) {
 	return `https://images.unsplash.com/photo-${id}?dpr=2&auto=format&w=${size} ${size}w`;
 }
-function makeUnsplashThumbnail (id, orientation = 'landscape') {
+function makeUnsplashThumbnail(id, orientation = 'landscape') {
 	const dimensions = orientation === 'square'
 		? 'w=300&h=300'
 		: 'w=240&h=159';
@@ -157,7 +158,7 @@ render(
 			spinnerColor={'#D40000'}
 			spinnerSize={150}
 			showThumbnails
-	/>
+		/>
 	</div>,
 	document.getElementById('example')
 );
