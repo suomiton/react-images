@@ -1295,20 +1295,20 @@ var Lightbox = function (_Component) {
           })
         );
       } else {
-        var videoId = item;
+        var video = item;
 
         var width = Math.min(window.innerWidth - window.innerWidth / 5, 800);
 
         return React.createElement(
           "div",
-          { key: videoId, id: videoId, className: "video-item" },
+          { key: video.src, id: video.src, className: "video-item" },
           React.createElement("iframe", {
             style: { border: "none" },
-            id: videoId,
+            id: video.src,
             type: "text/html",
             width: width,
             height: 3 * width / 4,
-            src: "//www.youtube.com/embed/" + videoId + "?rel=0&amp;showinfo=0",
+            src: "//www.youtube.com/embed/" + video.src + "?rel=0&amp;showinfo=0",
             frameBorder: "0",
             allow: "autoplay; encrypted-media",
             allowFullScreen: true

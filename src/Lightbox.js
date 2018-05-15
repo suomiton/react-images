@@ -302,19 +302,19 @@ class Lightbox extends Component {
         </figure>
       );
     } else {
-      const videoId = item;
+      const video = item;
 
       var width = Math.min(window.innerWidth - window.innerWidth / 5, 800);
 
       return (
-        <div key={videoId} id={videoId} className="video-item">
+        <div key={video.src} id={video.src} className="video-item">
           <iframe
             style={{ border: "none" }}
-            id={videoId}
+            id={video.src}
             type="text/html"
             width={width}
             height={3 * width / 4}
-            src={`//www.youtube.com/embed/${videoId}?rel=0&amp;showinfo=0`}
+            src={`//www.youtube.com/embed/${video.src}?rel=0&amp;showinfo=0`}
             frameBorder="0"
             allow="autoplay; encrypted-media"
             allowFullScreen
