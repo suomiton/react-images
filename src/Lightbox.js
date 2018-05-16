@@ -62,18 +62,18 @@ class Lightbox extends Component {
     if (!canUseDom) return;
 
     const currentIndex = this.props.currentItem;
-    if (nextProps.items[currentIndex].type === "image") {
+    const nextIndex = nextProps.currentItem + 1;
+    const prevIndex = nextProps.currentItem - 1;
+    let preloadIndex;
+
+    if (currentIndex && nextProps.currentItem > currentIndex) {
+      preloadIndex = nextIndex;
+    } else if (currentIndex && nextProps.currentItem < currentIndex) {
+      preloadIndex = prevIndex;
+    }
+
+    if (nextProps.items[nextProps.currentItem].type === "image") {
       if (nextProps.preloadNextImage) {
-        const nextIndex = nextProps.currentItem + 1;
-        const prevIndex = nextProps.currentItem - 1;
-        let preloadIndex;
-
-        if (currentIndex && nextProps.currentItem > currentIndex) {
-          preloadIndex = nextIndex;
-        } else if (currentIndex && nextProps.currentItem < currentIndex) {
-          preloadIndex = prevIndex;
-        }
-
         // if we know the user's direction just get one image
         // otherwise, to be safe, we need to grab one in each direction
         if (preloadIndex) {
@@ -95,6 +95,8 @@ class Lightbox extends Component {
         );
         this.setState({ imageLoaded: img.complete });
       }
+    } else {
+      this.setState({ imageLoaded: true });
     }
 
     // add/remove event listeners
@@ -122,7 +124,7 @@ class Lightbox extends Component {
   preloadImage(idx, onload) {
     const data = this.props.items[idx];
 
-    if (!data) return;
+    if (!data || data.type === "video") return;
 
     const img = new Image();
     const sourceSet = normalizeSourceSet(data);
