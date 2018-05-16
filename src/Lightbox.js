@@ -61,38 +61,40 @@ class Lightbox extends Component {
   componentWillReceiveProps(nextProps) {
     if (!canUseDom) return;
 
-    if (nextProps.preloadNextImage) {
-      const currentIndex = this.props.currentItem;
-      const nextIndex = nextProps.currentItem + 1;
-      const prevIndex = nextProps.currentItem - 1;
-      let preloadIndex;
+    const currentIndex = this.props.currentItem;
+    if (nextProps.items[currentIndex].type === "image") {
+      if (nextProps.preloadNextImage) {
+        const nextIndex = nextProps.currentItem + 1;
+        const prevIndex = nextProps.currentItem - 1;
+        let preloadIndex;
 
-      if (currentIndex && nextProps.currentItem > currentIndex) {
-        preloadIndex = nextIndex;
-      } else if (currentIndex && nextProps.currentItem < currentIndex) {
-        preloadIndex = prevIndex;
+        if (currentIndex && nextProps.currentItem > currentIndex) {
+          preloadIndex = nextIndex;
+        } else if (currentIndex && nextProps.currentItem < currentIndex) {
+          preloadIndex = prevIndex;
+        }
+
+        // if we know the user's direction just get one image
+        // otherwise, to be safe, we need to grab one in each direction
+        if (preloadIndex) {
+          this.preloadImage(preloadIndex);
+        } else {
+          this.preloadImage(prevIndex);
+          this.preloadImage(nextIndex);
+        }
       }
 
-      // if we know the user's direction just get one image
-      // otherwise, to be safe, we need to grab one in each direction
-      if (preloadIndex) {
-        this.preloadImage(preloadIndex);
-      } else {
-        this.preloadImage(prevIndex);
-        this.preloadImage(nextIndex);
+      // preload current image
+      if (
+        this.props.currentItem !== nextProps.currentItem ||
+        (!this.props.isOpen && nextProps.isOpen)
+      ) {
+        const img = this.preloadImage(
+          nextProps.currentItem,
+          this.handleImageLoaded
+        );
+        this.setState({ imageLoaded: img.complete });
       }
-    }
-
-    // preload current image
-    if (
-      this.props.currentItem !== nextProps.currentItem ||
-      (!this.props.isOpen && nextProps.isOpen)
-    ) {
-      const img = this.preloadImage(
-        nextProps.currentItem,
-        this.handleImageLoaded
-      );
-      this.setState({ imageLoaded: img.complete });
     }
 
     // add/remove event listeners

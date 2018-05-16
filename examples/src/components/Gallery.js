@@ -10,6 +10,7 @@ class Gallery extends Component {
 		this.state = {
 			lightboxIsOpen: false,
 			currentImage: 0,
+			videoIsOpen: false
 		};
 
 		this.closeLightbox = this.closeLightbox.bind(this);
@@ -18,6 +19,7 @@ class Gallery extends Component {
 		this.gotoImage = this.gotoImage.bind(this);
 		this.handleClickImage = this.handleClickImage.bind(this);
 		this.openLightbox = this.openLightbox.bind(this);
+		this.showVideo = this.showVideo.bind(this);
 	}
 	openLightbox(index, event) {
 		event.preventDefault();
@@ -30,6 +32,7 @@ class Gallery extends Component {
 		this.setState({
 			currentImage: 0,
 			lightboxIsOpen: false,
+			videoIsOpen: false
 		});
 	}
 	gotoPrevious() {
@@ -51,6 +54,12 @@ class Gallery extends Component {
 		if (this.state.currentImage === this.props.images.length - 1) return;
 
 		this.gotoNext();
+	}
+	showVideo(e) {
+		e.preventDefault();
+		this.setState({
+			videoIsOpen: true
+		});
 	}
 	renderGallery() {
 		const { images } = this.props;
@@ -90,6 +99,18 @@ class Gallery extends Component {
 					onClickNext={this.gotoNext}
 					onClickPrev={this.gotoPrevious}
 					onClickThumbnail={this.gotoImage}
+					onClose={this.closeLightbox}
+					preventScroll={this.props.preventScroll}
+					showThumbnails={this.props.showThumbnails}
+					spinner={this.props.spinner}
+					spinnerColor={this.props.spinnerColor}
+					spinnerSize={this.props.spinnerSize}
+					theme={this.props.theme}
+				/>
+				<a href="https://www.youtube.com/watch?v=v280ENNTrdE" onClick={this.showVideo}>Test</a>
+				<Lightbox
+					items={[{ type: 'video', src: 'v280ENNTrdE' }]}
+					isOpen={this.state.videoIsOpen}
 					onClose={this.closeLightbox}
 					preventScroll={this.props.preventScroll}
 					showThumbnails={this.props.showThumbnails}
