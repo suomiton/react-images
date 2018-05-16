@@ -10,11 +10,11 @@ A simple, responsive lightbox component for displaying an array of images.
 
 
 ```bash
-npm install --save react-images
+npm install --save https://github.com/suomiton/react-images.git
 ```
 or
 ```bash
-yarn add react-images
+yarn add https://github.com/suomiton/react-images.git
 ```
 
 ```jsx
@@ -26,7 +26,7 @@ export default class Sample extends React.Component {
   render() {
     return (
       <Lightbox
-        images={[{ src: 'http://example.com/img1.jpg' }, { src: 'http://example.com/img2.jpg' }]}
+        items={[{ src: 'http://example.com/img1.jpg', type: 'image' }, { src: '[youtube-video-id]', type: 'video' }]}
         isOpen={this.state.lightboxIsOpen}
         onClickPrev={this.gotoPrevious}
         onClickNext={this.gotoNext}
@@ -36,20 +36,6 @@ export default class Sample extends React.Component {
   }
 }
 ```
-
-
-## Demo & Examples
-
-Live demo: [jossmac.github.io/react-images](http://jossmac.github.io/react-images/)
-
-To build the examples locally, run:
-
-```
-yarn install
-yarn start
-```
-
-Then open [`localhost:8000`](http://localhost:8000) in a browser.
 
 ### Using srcSet
 
@@ -62,6 +48,7 @@ Example using srcSet:
 
 const LIGHTBOX_IMAGE_SET = [
   {
+    type: 'image',
     src: 'http://example.com/example/img1.jpg',
     caption: 'A forest'
     srcSet: [
@@ -72,6 +59,7 @@ const LIGHTBOX_IMAGE_SET = [
     ],
   },
   {
+    type: 'image',
     src: 'http://example.com/example/img2.jpg',
     srcSet: [
       'http://example.com/example/img2_1024.jpg 1024w',
@@ -93,7 +81,7 @@ closeButtonTitle | string | ' Close (Esc) ' | Customize close esc title
 enableKeyboardInput | bool  | true  | Supports keyboard input - <code>esc</code>, <code>arrow left</code>, and <code>arrow right</code>
 currentImage  | number  | 0 | The index of the image to display initially
 customControls | array | undefined | An array of elements to display as custom controls on the top of lightbox
-images  | array | undefined | Required. Array of image objects See image options table below
+items  | array | undefined | Required. Array of media objects See media options table below
 imageCountSeparator  | String  | ' of ' | Customize separator in the image count
 isOpen  | bool  | false | Whether or not the lightbox is displayed
 leftArrowTitle | string | ' Previous (Left arrow key) ' | Customize of left arrow title
@@ -112,10 +100,11 @@ spinnerColor | string | 'white' | Color of spinner
 spinnerSize | number | 100 | Size of spinner
 preventScroll | bool | true | Determines whether scrolling is prevented via [react-scrolllock](https://github.com/jossmac/react-scrolllock)
 
-## Images object
+## Medias object
 
 Property	|	Type		|	Default		|	Description
 :-----------------------|:--------------|:--------------|:--------------------------------
+type  | 'image' or 'video' | undefined | Required 
 src  | string | undefined | Required
 srcSet  | array of strings | undefined | Optional
 caption  | string | undefined | Optional
