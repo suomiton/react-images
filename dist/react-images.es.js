@@ -1311,7 +1311,7 @@ var Lightbox = function (_Component) {
             id: video.src,
             type: "text/html",
             width: width,
-            height: 3 * width / 4,
+            height: 9 * width / 16,
             src: "//www.youtube.com/embed/" + video.src + "?rel=0&amp;showinfo=0;autoplay=1",
             frameBorder: "0",
             allow: "autoplay; encrypted-media",
