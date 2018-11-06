@@ -1395,7 +1395,7 @@ var Lightbox = function (_Component) {
         {
           className: aphrodite.css(this.classes.spinner, !imageLoaded && this.classes.spinnerActive)
         },
-        React__default.createElement(Spinner$$1, { color: spinnerColor, size: spinnerSize })
+        !imageLoaded && React__default.createElement(Spinner$$1, { color: spinnerColor, size: spinnerSize })
       );
     }
   }, {

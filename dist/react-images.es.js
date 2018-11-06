@@ -1393,7 +1393,7 @@ var Lightbox = function (_Component) {
         {
           className: css(this.classes.spinner, !imageLoaded && this.classes.spinnerActive)
         },
-        React.createElement(Spinner$$1, { color: spinnerColor, size: spinnerSize })
+        !imageLoaded && React.createElement(Spinner$$1, { color: spinnerColor, size: spinnerSize })
       );
     }
   }, {
