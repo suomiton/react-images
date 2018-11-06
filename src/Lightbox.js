@@ -317,7 +317,7 @@ class Lightbox extends Component {
             id={video.src}
             type="text/html"
             width={width}
-            height={9 * width / 16}
+            height={(9 * width) / 16}
             src={`//www.youtube.com/embed/${
               video.src
             }?rel=0&amp;showinfo=0;autoplay=1`}
@@ -399,7 +399,7 @@ class Lightbox extends Component {
           !imageLoaded && this.classes.spinnerActive
         )}
       >
-        <Spinner color={spinnerColor} size={spinnerSize} />
+        {!imageLoaded && <Spinner color={spinnerColor} size={spinnerSize} />}
       </div>
     );
   }
