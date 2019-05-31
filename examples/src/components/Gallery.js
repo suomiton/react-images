@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { css, StyleSheet } from 'aphrodite/no-important';
-import Lightbox from 'react-images';
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { css, StyleSheet } from "aphrodite/no-important";
+import Lightbox from "react-images";
 
 class Gallery extends Component {
 	constructor() {
@@ -25,7 +25,7 @@ class Gallery extends Component {
 		event.preventDefault();
 		this.setState({
 			currentImage: index,
-			lightboxIsOpen: true,
+			lightboxIsOpen: true
 		});
 	}
 	closeLightbox() {
@@ -37,17 +37,17 @@ class Gallery extends Component {
 	}
 	gotoPrevious() {
 		this.setState({
-			currentImage: this.state.currentImage - 1,
+			currentImage: this.state.currentImage - 1
 		});
 	}
 	gotoNext() {
 		this.setState({
-			currentImage: this.state.currentImage + 1,
+			currentImage: this.state.currentImage + 1
 		});
 	}
 	gotoImage(index) {
 		this.setState({
-			currentImage: index,
+			currentImage: index
 		});
 	}
 	handleClickImage() {
@@ -66,24 +66,22 @@ class Gallery extends Component {
 
 		if (!images) return;
 
-		const gallery = images.filter(i => i.useForDemo).map((obj, i) => {
-			return (
-				<a
-					href={obj.src}
-					className={css(classes.thumbnail, classes[obj.orientation])}
-					key={i}
-					onClick={(e) => this.openLightbox(i, e)}
-				>
-					<img src={obj.thumbnail} className={css(classes.source)} />
-				</a>
-			);
-		});
+		const gallery = images
+			.filter(i => i.useForDemo)
+			.map((obj, i) => {
+				return (
+					<a
+						href={obj.src}
+						className={css(classes.thumbnail, classes[obj.orientation])}
+						key={i}
+						onClick={e => this.openLightbox(i, e)}
+					>
+						<img src={obj.thumbnail} className={css(classes.source)} />
+					</a>
+				);
+			});
 
-		return (
-			<div className={css(classes.gallery)}>
-				{gallery}
-			</div>
-		);
+		return <div className={css(classes.gallery)}>{gallery}</div>;
 	}
 	render() {
 		return (
@@ -93,7 +91,7 @@ class Gallery extends Component {
 				{this.renderGallery()}
 				<Lightbox
 					currentItem={this.state.currentImage}
-					items={this.props.images.map(i => ({ type: 'image', src: i.src }))}
+					items={this.props.images.map(i => ({ type: "image", src: i.src }))}
 					isOpen={this.state.lightboxIsOpen}
 					onClickImage={this.handleClickImage}
 					onClickNext={this.gotoNext}
@@ -107,9 +105,14 @@ class Gallery extends Component {
 					spinnerSize={this.props.spinnerSize}
 					theme={this.props.theme}
 				/>
-				<a href="https://www.youtube.com/watch?v=v280ENNTrdE" onClick={this.showVideo}>Test</a>
+				<a
+					href="https://www.youtube.com/watch?v=4PwIcXDnK8c"
+					onClick={this.showVideo}
+				>
+					Test
+				</a>
 				<Lightbox
-					items={[{ type: 'video', src: 'v280ENNTrdE' }]}
+					items={[{ type: "video", src: "4PwIcXDnK8c" }]}
 					isOpen={this.state.videoIsOpen}
 					onClose={this.closeLightbox}
 					preventScroll={this.props.preventScroll}
@@ -124,65 +127,65 @@ class Gallery extends Component {
 	}
 }
 
-Gallery.displayName = 'Gallery';
+Gallery.displayName = "Gallery";
 Gallery.propTypes = {
 	heading: PropTypes.string,
 	images: PropTypes.array,
 	showThumbnails: PropTypes.bool,
-	subheading: PropTypes.string,
+	subheading: PropTypes.string
 };
 
 const gutter = {
 	small: 2,
-	large: 4,
+	large: 4
 };
 const classes = StyleSheet.create({
 	gallery: {
 		marginRight: -gutter.small,
-		overflow: 'hidden',
+		overflow: "hidden",
 
-		'@media (min-width: 500px)': {
-			marginRight: -gutter.large,
-		},
+		"@media (min-width: 500px)": {
+			marginRight: -gutter.large
+		}
 	},
 
 	// anchor
 	thumbnail: {
-		boxSizing: 'border-box',
-		display: 'block',
-		float: 'left',
+		boxSizing: "border-box",
+		display: "block",
+		float: "left",
 		lineHeight: 0,
 		paddingRight: gutter.small,
 		paddingBottom: gutter.small,
-		overflow: 'hidden',
+		overflow: "hidden",
 
-		'@media (min-width: 500px)': {
+		"@media (min-width: 500px)": {
 			paddingRight: gutter.large,
-			paddingBottom: gutter.large,
-		},
+			paddingBottom: gutter.large
+		}
 	},
 
 	// orientation
 	landscape: {
-		width: '30%',
+		width: "30%"
 	},
 	square: {
 		paddingBottom: 0,
-		width: '40%',
+		width: "40%",
 
-		'@media (min-width: 500px)': {
-			paddingBottom: 0,
-		},
+		"@media (min-width: 500px)": {
+			paddingBottom: 0
+		}
 	},
 
 	// actual <img />
 	source: {
 		border: 0,
-		display: 'block',
-		height: 'auto',
-		maxWidth: '100%',
-		width: 'auto',
-	},
+		display: "block",
+		height: "auto",
+		maxWidth: "100%",
+		width: "auto"
+	}
 });
 
 export default Gallery;
