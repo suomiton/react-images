@@ -26,7 +26,7 @@ export default class Sample extends React.Component {
   render() {
     return (
       <Lightbox
-        items={[{ src: 'http://example.com/img1.jpg', type: 'image' }, { src: '[youtube-video-id]', type: 'video' }]}
+        items={[{ src: 'http://example.com/img1.jpg', type: 'image' }, { src: '[youtube-video-id]', type: 'video' }, { src: 'http://example.com/video1.mp4', type: 'video'}]}
         isOpen={this.state.lightboxIsOpen}
         onClickPrev={this.gotoPrevious}
         onClickNext={this.gotoNext}
