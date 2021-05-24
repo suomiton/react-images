@@ -314,7 +314,7 @@ class Lightbox extends Component {
 
 			var width = Math.min(window.innerWidth - window.innerWidth / 5, 800);
 
-			const videoSrc = video.hasFullUrl
+			const videoSrc = video.src.startsWith("http://") || video.src.startsWith("https://")
 			 ? video.src
 			 : `//www.youtube.com/embed/${video.src}?rel=0&amp;showinfo=0;autoplay=1`;
 
